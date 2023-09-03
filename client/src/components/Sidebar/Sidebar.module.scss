@@ -1,0 +1,40 @@
+.logo{
+    margin:30px 0;
+}
+
+
+.container{
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    width: 100%;
+}
+
+.option{
+    margin: 10px 0;
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: #252b48;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    min-width: 280px;
+    cursor: pointer;
+}
+.active{
+    color: #c70039 !important;
+}
+.option-child{
+    margin: 10px 0;
+    margin-left: auto;
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: #252b48;
+    display: flex;
+    align-items: center;
+    color: white;
+    max-width: 250px;
+    font-weight: 600;
+    cursor: pointer;
+}

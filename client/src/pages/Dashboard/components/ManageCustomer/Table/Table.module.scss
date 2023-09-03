@@ -1,0 +1,43 @@
+
+.content{
+    margin: 30px;
+    font-size: 30;
+    font-weight: 500;
+}
+
+.tittle{
+    flex:1;
+    font-size: 40;
+    font-weight: 500;
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 20px;
+    margin: 10px 20px;
+}
+
+.element{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 5px;
+}
+
+.row-tb{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    .h{
+        flex: 15%
+    }
+    .r{
+        flex: 25%
+    }
+}
+
+.horizontal-line {
+    padding: 0px 50px;
+    height: 1px; 
+    background-color: #333; 
+  }

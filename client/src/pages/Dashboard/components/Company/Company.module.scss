@@ -1,0 +1,67 @@
+.container{
+    display: "flex";
+    flex-direction: column;
+    padding: 30px 100px;
+}
+
+.first{
+    display: flex;
+    flex-direction: row;
+    .tittle{
+        flex:1;
+        font-size: 30;
+        font-weight: 500;
+    }
+    .edit-btn{
+        padding: 5px 20px;
+        border-radius: 10px;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+    }
+}
+.non-change{
+    opacity: 0.5;
+    cursor: default !important;
+}
+
+.second{
+    display: flex;
+    flex-direction: column;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+
+    input{
+        width: 100%;
+            font-size: 15px;
+            padding: 5px 30px;
+            border: none;
+            outline: none;
+            border-radius: 20px;
+            background-color: #eae7cf;
+    
+            &::placeholder {
+                font-size: 16px;
+            }
+            &:focus {
+                box-shadow: none;
+            }
+    }
+
+}
+.elm {
+    min-width: 100px;
+}
+
+.val{
+    min-width: 500px;
+    background-color: #eae7cf;
+    height: 100%;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+

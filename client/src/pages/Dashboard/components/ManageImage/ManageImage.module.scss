@@ -1,0 +1,22 @@
+.container{
+    margin: 30px;
+}
+
+.tittle{
+    font-size: 40;
+    font-weight: 500;
+    margin: 30px 0;
+}
+
+.btn{
+    padding: 5px 10px;
+    background-color: #c1a666;
+    color: white;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    border: "1px solid #ebdac4";
+    margin: 50px 0; 
+    cursor: pointer;
+}

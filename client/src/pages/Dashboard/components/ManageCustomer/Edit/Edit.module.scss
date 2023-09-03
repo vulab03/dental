@@ -1,0 +1,33 @@
+.container{
+    padding: 50px 100px;
+    font-size: 30;
+    font-weight: 500;  
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.field{
+    min-width: 100px;
+}
+input{
+    background-color: white;
+    padding: 2px 10px  !important;
+}
+.edit-btn{
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    width: 100px;
+}
+.non-change{
+    opacity: 0.5;
+    cursor: default !important;
+}
