@@ -18,7 +18,7 @@ function Edit() {
 
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/user/find-id?id=${id}`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}user/find-id?id=${id}`)
         .then(res=>{
             console.log(res.data)
             setCustomer(res.data.user)
@@ -73,7 +73,7 @@ function Edit() {
         }
         else{
             // save
-            axios.post(`${process.env.REACT_APP_SERVER_URI}/user/update`,customer)
+            axios.post(`${process.env.REACT_APP_SERVER_URI}user/update`,customer)
             console.log("save")
             toast.success('Saved!', {
                 position: 'top-right',

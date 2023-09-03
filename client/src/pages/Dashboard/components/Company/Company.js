@@ -13,7 +13,7 @@ function Company() {
     const [temp,setTemp] = useState({})
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/company/get`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}company/get`)
         .then(res=>{
             setValue(res.data)
             setTemp(res.data)
@@ -62,7 +62,7 @@ function Company() {
         }
         else{
             // save
-            axios.post(`${process.env.REACT_APP_SERVER_URI}/company/update`,value)
+            axios.post(`${process.env.REACT_APP_SERVER_URI}company/update`,value)
             toast.success('Saved!', {
                 position: 'top-right',
                 autoClose: 2000, // Thời gian thông báo tự đóng (ms)

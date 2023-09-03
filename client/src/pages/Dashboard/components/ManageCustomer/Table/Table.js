@@ -13,7 +13,7 @@ function Table() {
     const [list,setList] = useState([])
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/user/get-all?page=1`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}user/get-all?page=1`)
         .then(res=>{
             console.log(res.data)
             setList(res.data.list)

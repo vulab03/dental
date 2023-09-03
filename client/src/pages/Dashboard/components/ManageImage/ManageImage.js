@@ -13,7 +13,7 @@ function ManageImage() {
     const [bg,setBg] = useState()
     const [image,setImage] = useState()
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/file/get`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}file/get`)
         .then(res=>{
             setBg(res.data.path)
             setImage(res.data.path)
@@ -21,7 +21,7 @@ function ManageImage() {
     },[])
     const handleChange=(image)=>{
         uploadFile(image,(res)=>{
-            axios.post(`${process.env.REACT_APP_SERVER_URI}/file/update`,{
+            axios.post(`${process.env.REACT_APP_SERVER_URI}file/update`,{
                 path: res.data.file
             })
         })

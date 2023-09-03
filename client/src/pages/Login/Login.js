@@ -18,7 +18,7 @@ function Login() {
 
 
     const onSubmit = (user) => {
-        axios.post(`${process.env.REACT_APP_SERVER_URI}/admin/login`,user)
+        axios.post(`${process.env.REACT_APP_SERVER_URI}admin/login`,user)
         .then(res=>{
             console.log(res.data)
             if (res.data.isAdmin){

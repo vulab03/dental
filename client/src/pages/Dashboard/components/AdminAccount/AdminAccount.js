@@ -14,7 +14,7 @@ function AdminAccount() {
 
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/admin/get`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}admin/get`)
         .then(res=>{
             setValue(res.data)
             setTemp(res.data)
@@ -62,7 +62,7 @@ function AdminAccount() {
         }
         else{
             // save
-            axios.post(`${process.env.REACT_APP_SERVER_URI}/admin/update`,value)
+            axios.post(`${process.env.REACT_APP_SERVER_URI}admin/update`,value)
             console.log("save")
             toast.success('Saved!', {
                 position: 'top-right',

@@ -17,7 +17,7 @@ function ManagePost() {
     const [post,setPost] = useState(postD)
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/post/get`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}post/get`)
         .then(res=>{
             setPost(res.data)
         })
@@ -36,7 +36,7 @@ function ManagePost() {
     }
 
     const handleSave=()=>{
-        axios.post(`${process.env.REACT_APP_SERVER_URI}/post/update`,post)
+        axios.post(`${process.env.REACT_APP_SERVER_URI}post/update`,post)
         toast.success('Saved!', {
             position: 'top-right',
             autoClose: 2000, // Thời gian thông báo tự đóng (ms)

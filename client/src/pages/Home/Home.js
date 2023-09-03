@@ -26,7 +26,7 @@ function Home() {
 
     const handleSearch = ()=>{
         setSearch(true);
-        axios.get(`${process.env.REACT_APP_SERVER_URI}/user/find-id?id=${input}`)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}user/find-id?id=${input}`)
         .then(res=>{
             setCustomer(res.data.user)
             setState(CHECKING)
@@ -42,7 +42,7 @@ function Home() {
     }
     const handlePolicy = ()=>{
         if (!policy){
-            axios.get(`${process.env.REACT_APP_SERVER_URI}/post/get`)
+            axios.get(`${process.env.REACT_APP_SERVER_URI}post/get`)
             .then(res=>{
                 setPolicy(res.data)
             })

@@ -88,7 +88,7 @@ function New() {
         }
         else{
             // save
-            axios.post(`${process.env.REACT_APP_SERVER_URI}/user/create`,customer)
+            axios.post(`${process.env.REACT_APP_SERVER_URI}user/create`,customer)
             console.log("save")
             toast.success('Saved!', {
                 position: 'top-right',
