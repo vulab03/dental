@@ -16,6 +16,10 @@ const publicRoutes = [
     { path: "/login", component: Login , layout : HeaderOnly },
     { path: "/register", component: Register },
     { path: "/", component: Home },
+    
+];
+
+const privateRoutes = [
     {path:"/dashboard",component:Dashboard,layout: DashboardLayout},
     {path:"/manage-image",component: ManageImage, layout: DashboardLayout },
     {path:"/manage-post",component: ManagePost, layout: DashboardLayout },
@@ -24,9 +28,7 @@ const publicRoutes = [
     {path: "/manage-customer/edit/:id",component: Edit, layout: DashboardLayout},
     {path:"/company-information",component: Company, layout: DashboardLayout},
     {path:"/admin-account",component: AdminAccount,layout: DashboardLayout},
-
+    
 ];
-
-const privateRoutes = [];
 
 export { publicRoutes, privateRoutes };

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes } from "./routes";
+import { privateRoutes, publicRoutes } from "./routes";
 import { FooterLayout } from "./layouts";
+import PrivateRoute from "./routes/privateRoute";
 
 function App() {
     
@@ -16,6 +17,22 @@ function App() {
                             <Route
                                 key={index}
                                 path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                    {privateRoutes.map((route, index) => {
+                        const Page = route.component;
+                        const Layout = route.layout || FooterLayout;
+
+                        return (
+                            <Route
+                                key={index}
+                                exact path={route.path}
                                 element={
                                     <Layout>
                                         <Page />

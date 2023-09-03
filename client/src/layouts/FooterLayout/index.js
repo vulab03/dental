@@ -3,10 +3,18 @@ import styles from "./FooterLayout.module.scss";
 
 import Footer from '../../components/Footer/index.js'
 import bg from "../../assets/images/bg.jpg"
+import axios from "axios";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function FooterLayout({ children }) {
+    const [bg,setBg] = useState()
+    axios.get(`${process.env.REACT_APP_SERVER_URI}/file/get`)
+    .then(res=>{
+        setBg(res.data.path)
+    })
+
     return (
         <>
             <div className={cx("container")} style={{

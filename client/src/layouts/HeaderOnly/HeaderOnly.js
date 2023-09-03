@@ -1,11 +1,16 @@
 import classNames from "classnames/bind";
-import Header from "../../components/Header/Header";
 import styles from "./HeaderOnly.module.scss";
 
-import bg from "../../assets/images/bg.jpg"
+import axios from "axios";
+import { useState } from "react";
 const cx = classNames.bind(styles);
 
 function HeaderOnly({ children }) {
+    const [bg,setBg] = useState()
+    axios.get(`${process.env.REACT_APP_SERVER_URI}/file/get`)
+    .then(res=>{
+        setBg(res.data.path)
+    })
     return (
         <div className={cx("container")} style={{
             width:"100vw",

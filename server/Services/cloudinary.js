@@ -3,9 +3,9 @@ const cloudinary = require('cloudinary').v2;
 
 // Configuration 
 cloudinary.config({
-  cloud_name: "doisii14ts",
-  api_key: "624655822659164",
-  api_secret: "y__qjC6mBj8tbiXQbkD2-W-kVqM"
+  cloud_name: "dnlopauxr",
+  api_key: "395823337119423",
+  api_secret: "LAJfn3o_dN3RTO9_-5dVrjVnKeE"
 });
 
 module.exports = cloudinary;
