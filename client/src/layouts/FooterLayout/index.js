@@ -10,7 +10,6 @@ const cx = classNames.bind(styles);
 
 function FooterLayout({ children }) {
     const [bg,setBg] = useState()
-    console.log(process.env.REACT_APP_SERVER_URI)
     axios.get(`${process.env.REACT_APP_SERVER_URI}/file/get`)
     .then(res=>{
         setBg(res.data.path)
