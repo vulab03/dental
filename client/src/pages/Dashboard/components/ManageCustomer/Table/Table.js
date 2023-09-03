@@ -4,11 +4,13 @@ import axios from "axios";
 import {  AiFillEdit, AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const cx = classNames.bind(styles);
 
 function Table() {
+    let [loading, setLoading] = useState(true);
 
     const [list,setList] = useState([])
 
@@ -17,6 +19,7 @@ function Table() {
         .then(res=>{
             console.log(res.data)
             setList(res.data.list)
+            setLoading(false)
         })
         .catch(err=>{
             console.log(err)
@@ -33,6 +36,18 @@ function Table() {
         navigate('/manage-customer/new-customer')
     }
     return <>
+    {
+        loading?
+        <div className={cx("loading")}> 
+            <ClipLoader
+                color={"#c1a666"}
+                loading={loading}
+                size={100}     
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+            </div>
+            :
         <div className={cx('container')}>
             <div className={cx('content')}>
                 <div className={cx("tittle")}>MANAGE CUSTOMER</div>
@@ -78,6 +93,7 @@ function Table() {
                 </div>
             </div>
         </div>
+    }
     </>;
 }
 

@@ -27,7 +27,7 @@ function Sidebar() {
         <div className={cx("container")}>
             <div className={cx("wrapper")}>
                 <div className={cx("logo")}>
-                    <img src ={logo} width="200px" height="200px"/>
+                    <img src ={logo} width="250px"/>
                 </div>
                 <div className={cx("option")} onClick={handleAdminClick}>
                     ADMIN DASHBOARD

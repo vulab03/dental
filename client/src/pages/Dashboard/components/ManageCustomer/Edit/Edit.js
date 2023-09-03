@@ -4,13 +4,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast} from "react-toastify"
+import ClipLoader from "react-spinners/ClipLoader";
 
 const cx = classNames.bind(styles);
 
 function Edit() {
     const { id } = useParams();
 
-
+    let [loading, setLoading] = useState(true);
     const [customer,setCustomer] = useState("")
     const [customerD,setCustomerD] = useState("")
 
@@ -23,6 +24,7 @@ function Edit() {
             console.log(res.data)
             setCustomer(res.data.user)
             setCustomerD(res.data.user)
+            setLoading(false)
         })
         .catch(err=>{
             console.error(err)
@@ -84,6 +86,18 @@ function Edit() {
 
 
     return <>
+    {
+        loading?
+        <div className={cx("loading")}> 
+            <ClipLoader
+                color={"#c1a666"}
+                loading={loading}
+                size={100}     
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+            </div>
+            :
         <div className={cx('container')}>
             <div style={{marginBottom:"20px"}} >MANAGE CUSTOMER/{id}</div>
             <div >ID Code: {id}</div>
@@ -199,7 +213,9 @@ function Edit() {
                     Save
             </div>
         </div>
+    }
     </>;
+
 }
 
 export default Edit;

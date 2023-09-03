@@ -3,10 +3,12 @@ import classNames from "classnames/bind";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {toast} from "react-toastify"
+import ClipLoader from "react-spinners/ClipLoader";
 
 const cx = classNames.bind(styles);
 
 function AdminAccount() {
+    let [loading, setLoading] = useState(true);
 
     const [value,setValue] = useState({})
     const [temp,setTemp] = useState({})
@@ -18,6 +20,7 @@ function AdminAccount() {
         .then(res=>{
             setValue(res.data)
             setTemp(res.data)
+            setLoading(false)
         })
     },[])
 
@@ -71,6 +74,18 @@ function AdminAccount() {
         }
     }
     return <>
+    {
+        loading?
+        <div className={cx("loading")}> 
+            <ClipLoader
+                color={"#c1a666"}
+                loading={loading}
+                size={100}     
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+            </div>
+            :
         <div className={cx('container')}>
             <div className={cx("first")}>
                 <div className={cx("tittle")}>ADMIN DASHBOARD/Admin account</div>
@@ -99,6 +114,7 @@ function AdminAccount() {
                 </div>
             </div>
         </div>
+    }
     </>;
 }
 

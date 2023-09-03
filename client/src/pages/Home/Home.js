@@ -56,7 +56,7 @@ function Home() {
                 <div className={cx("column")}>
 
                 <div className={cx("row","logo")} >
-                    <img src={logo} width="200px" height="200px"/>
+                    <img src={logo} width="250px" />
                 </div>
                 <div className={cx("search")}>
                     { 

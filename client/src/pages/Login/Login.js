@@ -4,6 +4,8 @@ import {useForm} from 'react-hook-form'
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/images/logo.png"
+
 const cx = classNames.bind(styles);
 
 function Login() {
@@ -43,6 +45,7 @@ function Login() {
     return <>
         <div className={cx("content")}>
 
+                <img src = {logo} width="250px"/>
             <div className={cx("login")}>
                 <div className={cx("tittle")}> WELCOME TO ADMIN DASHBOARD </div>
                 <form onSubmit={handleSubmit(onSubmit)}>

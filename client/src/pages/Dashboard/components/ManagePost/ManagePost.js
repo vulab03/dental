@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {toast} from "react-toastify"
+import ClipLoader from "react-spinners/ClipLoader";
 
 const cx = classNames.bind(styles);
 
@@ -15,11 +16,14 @@ function ManagePost() {
 
     }
     const [post,setPost] = useState(postD)
+    let [loading, setLoading] = useState(true);
+
 
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_SERVER_URI}post/get`)
         .then(res=>{
             setPost(res.data)
+            setLoading(false)
         })
     },[])
 
@@ -44,6 +48,18 @@ function ManagePost() {
     }
 
     return <>
+    {
+        loading?
+        <div className={cx("loading")}> 
+        <ClipLoader
+            color={"#c1a666"}
+            loading={loading}
+            size={100}     
+            aria-label="Loading Spinner"
+            data-testid="loader"
+        />
+        </div>
+        :
         <div className={cx('container')}>
             <div style={{fontSize:'20px',fontWeight:"500",margin:"10px 30px"}}>MANAGE POST</div>
             <div className={cx("checking")}>
@@ -82,6 +98,7 @@ function ManagePost() {
                     Save
             </div>
         </div>
+    }
     </>;
 }
 
