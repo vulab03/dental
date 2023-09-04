@@ -13,18 +13,25 @@ function Table() {
     let [loading, setLoading] = useState(true);
 
     const [list,setList] = useState([])
+    const [amount,setAmount] = useState([])
+    const [activePage,setActive] = useState(1)
+    const [search,setSearch] = useState("")
+    const [back,setBack] = useState(false)
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_SERVER_URI}user/get-all?page=1`)
+        
+        !back&&axios.get(`${process.env.REACT_APP_SERVER_URI}user/get-all?page=${activePage}`)
         .then(res=>{
             console.log(res.data)
             setList(res.data.list)
+            setAmount(parseInt(res.data.amount/6) +1)
+            console.log(Math.floor(res.data.amount/6) +1)
             setLoading(false)
         })
         .catch(err=>{
             console.log(err)
         })
-    },[])
+    },[activePage,back])
 
     const navigate = useNavigate()
 
@@ -34,6 +41,18 @@ function Table() {
     }
     const handleAdd = ()=>{
         navigate('/manage-customer/new-customer')
+    }
+    const handleSeacrh=()=>{
+        setAmount(0)
+        setBack(true)
+        axios.get(`${process.env.REACT_APP_SERVER_URI}user/get-phone?phone=${search}`)
+        .then(res=>{
+            setList(res.data.list)
+            setLoading(false)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
     return <>
     {
@@ -53,6 +72,18 @@ function Table() {
                 <div className={cx("tittle")}>MANAGE CUSTOMER</div>
                 <div style={{display:"flex",flexDirection:"row",padding:"10px 30px"}}>
                     <div className={cx("tittle")}>LIST OF CUSTOMERS</div>
+                    <div className={cx("search")} >
+                        <input value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
+                        <div style={{color:"white",backgroundColor:"#c70039",cursor:"pointer",marginLeft:"10px", padding:"5px 10px",borderRadius:"20px"}} onClick={handleSeacrh}>
+                        Search
+                        </div>
+                        {back
+                        &&<div 
+                            style={{textDecoration:"underline",color:"red",cursor:"pointer",marginLeft:"10px", padding:"5px 10px",borderRadius:"20px"}} 
+                            onClick={()=>{setBack(false); setSearch("")}}>
+                        Back
+                        </div>}
+                    </div>
                     <div style={{color:"white",backgroundColor:"#c70039",cursor:"pointer", padding:"5px 10px",borderRadius:"20px"}} onClick={handleAdd}>
                         <AiFillPlusCircle size={"20"} />
                         Add
@@ -77,7 +108,7 @@ function Table() {
                                 <div  key={e.id} className={cx("element")}>
                                 <div className={cx("row-tb")}>
                                     
-                                    <div className={cx("h")}>{index+1}</div>
+                                    <div className={cx("h")}>{index+1+6*(activePage-1)}</div>
                                     <div className={cx("r")}>{e.id}</div>
                                     <div className={cx("r")}>{e.nameCustomer}</div>
                                     <div className={cx("r")}>{e.startDate}</div>
@@ -90,6 +121,19 @@ function Table() {
                             )
                         })
                     }
+                </div>
+                <div className={cx("change-page")}>
+                    {[...Array(amount)].map((_,i)=>{
+                        return (<>
+                            <div key ={i} className={cx("page",i+1===activePage&&"active")} onClick={()=>{
+                                setActive(i+1)
+                                setLoading(true)
+                            }}>
+                            {i+1}
+                            </div>
+                        
+                        </>) 
+                    })}
                 </div>
             </div>
         </div>

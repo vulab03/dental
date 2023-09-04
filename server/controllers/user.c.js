@@ -4,12 +4,25 @@ const User = require("../models/user")
 const userController = {
     getAll:async(req,res,next)=>{
         try {
+            
             const limit = 6
             const page = req.query.page
+            const amount = await User.countDocuments()
             const skip = (page - 1) * limit;
             const users = await User.find({})
               .skip(skip)
               .limit(limit)
+            return res.status(200).json({list: users,amount})
+
+        } catch (error) {
+            next(createError(error.status||500,error.message))
+            
+        }
+    },
+    getByPhone: async (req,res,next)=>{
+        try {
+            
+            const users = await User.find({phone:req.query.phone})
             return res.status(200).json({list: users})
 
         } catch (error) {

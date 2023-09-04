@@ -10,7 +10,16 @@
     font-size: 40;
     font-weight: 500;
 }
+.search{
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    input{
+        max-width: 300px;
+    }
+}
 .table{
+    flex: 1;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -41,3 +50,21 @@
     height: 1px; 
     background-color: #333; 
   }
+
+.change-page{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .page{
+        cursor: pointer;
+        padding:5px 10px;
+        margin: 10px;
+        border: 5px solid #ebdac4;
+    }
+    .active{
+        background-color: #c70039;
+        color: white;
+        font-weight: 500;
+    }
+}

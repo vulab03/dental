@@ -13,14 +13,14 @@ const Footer = () => {
             <div className={cx('footer-content')}>
                 <div className="container">
                     <div className='row'>                        
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                         </div>
-                        <div className={cx("col-md-4","content")}>
+                        <div className={cx("col-md-6","content")}>
                             <div className={cx("name","row")} style={{fontWeight:"500"}}>
                             VU DENTAL LABORATORY
                             </div>
                             <div className={cx("horizontal-line")}></div>
-                            <div className='row' style={{fontWeight:"400", display:"flex", flexDirection:"row"}}>
+                            <div className='row' style={{fontWeight:"400",maxWidth:"600px", display:"flex", flexDirection:"row"}}>
                                 <div className='column'>
                                     <AiTwotoneHome size={20} color="black" style={{marginRight:"5px"}}/>
                                     <span>638/10 Le Hong Phong, 10 Ward, 10 District, Ho Chi Minh City</span>                            
@@ -33,7 +33,7 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                         </div>
                     </div>
                 </div>

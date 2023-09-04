@@ -1,5 +1,5 @@
 .footer {
-    z-index: 11;
+    z-index: 1;
     padding: 0 20px;
     display: flex;
     height: 15vh;
@@ -18,10 +18,6 @@
     color: black;
 }
 
-
-li{
-    list-style: none;
-}
 
 @media (max-width: 991.98px) {
     .footer {
