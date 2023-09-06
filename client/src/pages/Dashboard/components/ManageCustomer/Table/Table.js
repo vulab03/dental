@@ -1,7 +1,7 @@
 import styles from "./Table.module.scss";
 import classNames from "classnames/bind";
 import axios from "axios";
-import {  AiFillEdit, AiFillPlusCircle } from "react-icons/ai";
+import {  AiFillCaretLeft, AiFillCaretRight, AiFillEdit, AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 function Table() {
     let [loading, setLoading] = useState(true);
-
+    const LIMIT = 8;
     const [list,setList] = useState([])
     const [amount,setAmount] = useState([])
     const [activePage,setActive] = useState(1)
@@ -24,8 +24,8 @@ function Table() {
         .then(res=>{
             console.log(res.data)
             setList(res.data.list)
-            setAmount(parseInt(res.data.amount/6) +1)
-            console.log(Math.floor(res.data.amount/6) +1)
+            setAmount(parseInt(res.data.amount/LIMIT) +1)
+            console.log(Math.floor(res.data.amount/LIMIT) +1)
             setLoading(false)
         })
         .catch(err=>{
@@ -48,11 +48,23 @@ function Table() {
         axios.get(`${process.env.REACT_APP_SERVER_URI}user/get-phone?phone=${search}`)
         .then(res=>{
             setList(res.data.list)
+            if(res.data.list.length===0)
+                {
+                    axios.get(`${process.env.REACT_APP_SERVER_URI}user/find-id?id=${search}`)
+                .then(res=>{
+                    setList([res.data.user])
+                })
+                .catch(err=>{
+                    setList([])
+                })
+            }
             setLoading(false)
         })
         .catch(err=>{
-            console.log(err)
+            
+
         })
+        
     }
     return <>
     {
@@ -103,16 +115,18 @@ function Table() {
                     </div>
 
                     {
-                        list?.map((e,index)=>{
+                        list.length===0 ? 
+                        <div className={cx("no-result")}>*No result match</div>
+                        :list?.map((e,index)=>{
                             return (
                                 <div  key={e.id} className={cx("element")}>
                                 <div className={cx("row-tb")}>
                                     
-                                    <div className={cx("h")}>{index+1+6*(activePage-1)}</div>
+                                    <div className={cx("h")}>{index+1+LIMIT*(activePage-1)}</div>
                                     <div className={cx("r")}>{e.id}</div>
                                     <div className={cx("r")}>{e.nameCustomer}</div>
                                     <div className={cx("r")}>{e.startDate}</div>
-                                    <div className={cx("h")}>
+                                    <div className={cx("h")} style={{paddingLeft:"20px"}}>
                                         <AiFillEdit size={"20"} color="#c70039" style={{margin:"5px", cursor:"pointer"}} onClick={()=>{handleEdit(e.id)}}/>
                                     </div>
                                 </div>
@@ -123,17 +137,37 @@ function Table() {
                     }
                 </div>
                 <div className={cx("change-page")}>
-                    {[...Array(amount)].map((_,i)=>{
+                    
+                    {
+                    
+                    amount <6 ?[...Array(amount)].map((_,i)=>{
                         return (<>
                             <div key ={i} className={cx("page",i+1===activePage&&"active")} onClick={()=>{
-                                setActive(i+1)
-                                setLoading(true)
+                                activePage!==i+1 &&setActive(i+1)
+                                activePage!==i+1 &&setLoading(true)
                             }}>
                             {i+1}
                             </div>
                         
                         </>) 
-                    })}
+                    })
+                    :   
+                    <div style={{display:"flex",flexDirection:"row"}}>
+                        {activePage!==1&&<div style={{padding:"10px",cursor:"pointer"}} onClick={()=>{setActive(activePage-1);setLoading(true)}}>
+                            <AiFillCaretLeft size="40" color="#c70039"/>
+                        </div>}
+                        <div className={cx("page")} onClick={()=>{
+                            setActive(activePage+1)
+                            setLoading(true)
+                        }}>
+                            {activePage}
+                        </div>
+                        {activePage!==amount+1&&<div style={{padding:"10px",cursor:"pointer"}} onClick={()=>{setActive(activePage+1);setLoading(true)}}>
+                            <AiFillCaretRight size="40" color="#c70039"/>
+                        </div>}
+                    </div>
+                    }
+                    
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ const userController = {
     getAll:async(req,res,next)=>{
         try {
             
-            const limit = 6
+            const limit = 8
             const page = req.query.page
             const amount = await User.countDocuments()
             const skip = (page - 1) * limit;
@@ -102,7 +102,10 @@ const userController = {
             console.log(error)
             next(createError(error.status||500,error.message))
         }
-    }    
+    },
+    getId: async(req,res,next)=>{
+        
+    }
 }
 
 module.exports = userController

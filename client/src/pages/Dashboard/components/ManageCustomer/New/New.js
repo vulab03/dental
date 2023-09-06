@@ -2,16 +2,18 @@ import styles from "./New.module.scss";
 import classNames from "classnames/bind";
 import axios from "axios";
 import { createRef, useEffect, useRef, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import {toast} from "react-toastify"
+import ShortUniqueId from 'short-unique-id';
 
 const cx = classNames.bind(styles);
 
 function New() {
     
     const [currentInputIndex, setCurrentInputIndex] = useState(0);
-    
+    const [addMore, setAdd] = useState(false)
+
     const inputRefs = useRef([])
+    const uid = new ShortUniqueId();
 
     inputRefs.current = Array(11)
         .fill()
@@ -32,22 +34,24 @@ function New() {
         inputRefs.current[currentInputIndex].current.focus(); 
     },[currentInputIndex])
     
-    const customerD = {
-        id: uuidv4(),
-        dental :"",
-        addressDental: "",
-        address: "",
-        nameCustomer: "",
-        age: "",
-        phone: "",
-        nameService:"",
-        country: "",
-        position: "",
-        startDate: "",
-        expireDate:""
+    const newCus =()=>{
+        return {
+            id: uid.rnd(8),
+            dental :"",
+            addressDental: "",
+            address: "",
+            nameCustomer: "",
+            age: "",
+            phone: "",
+            nameService:"",
+            country: "",
+            position: "",
+            startDate: "",
+            expireDate:""
+        }
     }
 
-    const [customer,setCustomer] = useState(customerD)
+    const [customer,setCustomer] = useState(newCus())
 
     const [change,setChange] = useState(false)
 
@@ -89,11 +93,20 @@ function New() {
         else{
             // save
             axios.post(`${process.env.REACT_APP_SERVER_URI}user/create`,customer)
+            .then(res=>{
+                toast.success('Saved!', {
+                    position: 'top-right',
+                    autoClose: 2000, // Thời gian thông báo tự đóng (ms)
+                });
+                setAdd(true)
+            })
+            .catch(err=>{
+                toast.error('Failed!', {
+                    position: 'top-right',
+                    autoClose: 2000, // Thời gian thông báo tự đóng (ms)
+                });
+            })
             console.log("save")
-            toast.success('Saved!', {
-                position: 'top-right',
-                autoClose: 2000, // Thời gian thông báo tự đóng (ms)
-            });
         }
     }
 
@@ -201,7 +214,7 @@ function New() {
                         Date of Start: 
                     </div>
                     <div>
-                        <input onFocus={()=>setCurrentInputIndex(9)} onKeyDown={handleKeyPress} ref = {inputRefs.current[9]} autoComplete="off" value={customer.startDate} onChange={(e)=>{handleChange("startDate",e.target.value)}}/>
+                        <input type="date" onFocus={()=>setCurrentInputIndex(9)} onKeyDown={handleKeyPress} ref = {inputRefs.current[9]} autoComplete="off" value={customer.startDate} onChange={(e)=>{handleChange("startDate",e.target.value)}}/>
 
                     </div>
                 </div>
@@ -210,13 +223,26 @@ function New() {
                         Expire Date: 
                     </div>
                     <div>
-                        <input onFocus={()=>setCurrentInputIndex(10)} onKeyDown={handleKeyPress} ref = {inputRefs.current[10]} autoComplete="off" value={customer.expireDate} onChange={(e)=>{handleChange("expireDate",e.target.value)}}/>
+                        <input type="date" onFocus={()=>setCurrentInputIndex(10)} onKeyDown={handleKeyPress} ref = {inputRefs.current[10]} autoComplete="off" value={customer.expireDate} onChange={(e)=>{handleChange("expireDate",e.target.value)}}/>
 
                     </div>
                 </div>
             </div>
+            
+            <div style={{display:"flex",flexDirection:"row"}}>
             <div className={cx("edit-btn",!change&&"non-change")} onClick={handleSave}>
                     Save
+            </div>
+            {
+                addMore
+                &&<div className={cx("edit-btn")}  
+                onClick={()=>{
+                    setCustomer(newCus())
+                    setAdd(false)
+                }}>
+                Add more
+                </div>
+            }
             </div>
         </div>
     </>;

@@ -14,13 +14,50 @@
     flex-direction: row;
 }
 
-input{
-    max-width: 500px;
-    background-color: white !important;
+.content{
+    border-radius: 10px;
+    border: 1px solid #d09812;
+    padding: 30px;
+}
+
+.list{
+    position: relative;
+    margin: 40px;
+    .abs{
+        position: absolute;
+        top: -42px;
+    }
+}
+
+.title{
+    input{
+        max-width: 500px;
+        background-color: white !important;
+    }
+
 }
 
 .inp{
     margin: 5px 30px;
+    display: flex;
+    flex-direction: row;
+    input{
+        padding-left: 30px !important;
+        background-color: white !important;
+    }
+
+    div{
+        position: relative;
+        .dot {
+            position: absolute;
+            top:10px;
+            left: 8px;
+            width: 10px; 
+            height: 10px; 
+            background-color: #d09812; 
+            border-radius: 50%; 
+          }
+    }
 }
 
 .edit-btn{

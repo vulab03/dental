@@ -24,7 +24,7 @@ function Login() {
         .then(res=>{
             console.log(res.data)
             if (res.data.isAdmin){
-                navigate('/dashboard')
+                navigate('/manage-customer')
                 localStorage.setItem("isAdmin",true)
             }
             else {

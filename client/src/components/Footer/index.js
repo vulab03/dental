@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Footer.module.scss';
 
-import { AiFillPhone, AiTwotoneHome } from 'react-icons/ai'
+import { AiFillPhone, AiOutlineMail, AiTwotoneHome } from 'react-icons/ai'
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
 const Footer = () => {
+    const [footer,setFooter] = useState()
+
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_SERVER_URI}company/get`)
+        .then(res=>{
+        setFooter(res.data)
+        })
+    },[])
     return (
 
         <div className={cx('footer')}>
@@ -23,13 +32,17 @@ const Footer = () => {
                             <div className='row' style={{fontWeight:"400",maxWidth:"600px", display:"flex", flexDirection:"row"}}>
                                 <div className='column'>
                                     <AiTwotoneHome size={20} color="black" style={{marginRight:"5px"}}/>
-                                    <span>638/10 Le Hong Phong, 10 Ward, 10 District, Ho Chi Minh City</span>                            
+                                    <span>{footer?.address}</span>                            
                                 </div>
                             </div>
-                            <div className='row' style={{fontWeight:"400"}}>
-                                <div className='column'>
+                            <div style={{display:"flex", flexDirection:"row", fontWeight:"400"}}>
+                                <div className='column' style={{marginRight:"50px"}}>
                                     <AiFillPhone size={20} color='black' style={{marginRight:"row"}}/>
-                                    0962624448
+                                    {footer?.hotline}
+                                </div>
+                                <div className='column'>
+                                    <AiOutlineMail size={20} color='black' style={{marginRight:"row"}}/>
+                                    {footer?.email}
                                 </div>
                             </div>
                         </div>

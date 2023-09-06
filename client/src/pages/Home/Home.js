@@ -79,7 +79,7 @@ function Home() {
                         search && state === CHECKING ?
                         <div className={cx("checking")}>
                             <div className="customer-info">
-                                <div style={{display:"flex",justifyContent:"center",margin:"5px 0"}}>CUSTOMER INFORMATION</div>
+                                <div style={{display:"flex",fontWeight:"600",justifyContent:"center",margin:"5px 0"}}>CUSTOMER INFORMATION</div>
                                 <div className={cx("row")}>
                                     <div className="column" style={{marginRight:"10px"}}>
                                         Dental Clinic: {customer?.dental}
@@ -95,7 +95,7 @@ function Home() {
                             </div>
 
                             <div className="service-info">
-                            <div style={{display:"flex",justifyContent:"center",margin:"5px 0"}}> SERVICE INFORMATION </div> 
+                            <div style={{display:"flex",fontWeight:"600",justifyContent:"center",margin:"5px 0"}}> SERVICE INFORMATION </div> 
                             Service Name: {customer?.nameService} <br/> 
                             Position: {customer?.position} <br/>
                             Country of Manufacture: {customer?.country} <br/>
@@ -105,12 +105,12 @@ function Home() {
 
                         </div>
                         :search && state === NO_RESULT
-                        ?<span>No results match. Try with another id code.</span>
+                        ?<div className={cx("no-result")}>*No results match. Try with another id code.</div>
                         : search && state === POLICY
                         ?<div>
                             <div className={cx("checking")}>
                             <div classname={cx("listcondition")}>
-                                <div style={{display:"flex",justifyContent:"center",margin:"5px 0",color:"#d09812"}}>WARRANTY CONDITIONS</div>
+                                <div style={{display:"flex",fontWeight:"500",justifyContent:"center",margin:"5px 0",color:"#d09812"}}>WARRANTY CONDITIONS</div>
                                 <div>{policy?.tittle}</div>
                                 <ul>
                                     {policy?.warranty?.map((e,i)=>{
@@ -122,7 +122,7 @@ function Home() {
                             </div>
 
                             <div className="service-info">
-                            <div style={{display:"flex",justifyContent:"center",margin:"5px 0",color:"#d09812"}}> NO ACCEPTANCE FOR  </div> 
+                            <div style={{display:"flex",fontWeight:"500",justifyContent:"center",margin:"5px 0",color:"#d09812"}}> NO ACCEPTANCE FOR  </div> 
                                 <ul>
                                     {policy?.noAccept?.map((e,i)=>{
                                         return (<li key = {i}>{e}</li>)

@@ -122,3 +122,5 @@
 03-09-2023	13:42:02----route: /admin/login----method: POST----res.status(...).message is not a function
 03-09-2023	16:04:42----route: /file/update----method: POST----Not Found
 04-09-2023	17:27:59----route: /user/get-all?page=----method: GET----BSON field 'skip' value must be >= 0, actual value '-6'
+04-09-2023	21:51:16----route: /user/create----method: POST----users validation failed: age: Cast to Number failed for value "a" (type string) at path "age"
+05-09-2023	23:18:29----route: /user/create----method: POST----users validation failed: age: Cast to Number failed for value "a" (type string) at path "age"

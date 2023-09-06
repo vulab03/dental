@@ -2,7 +2,7 @@ import styles from "./Edit.module.scss";
 import classNames from "classnames/bind";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast} from "react-toastify"
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -17,7 +17,7 @@ function Edit() {
 
     const [change,setChange] = useState(false)
 
-
+    const navigate = useNavigate()
     useEffect(()=>{
         axios.get(`${process.env.REACT_APP_SERVER_URI}user/find-id?id=${id}`)
         .then(res=>{
@@ -99,7 +99,10 @@ function Edit() {
             </div>
             :
         <div className={cx('container')}>
-            <div style={{marginBottom:"20px"}} >MANAGE CUSTOMER/{id}</div>
+            <div style={{marginBottom:"20px",display:"flex",flexDirection:"row"}}>
+                <div style={{textDecoration:"underline",color:"red",cursor:"pointer"}} onClick={()=>navigate("/manage-customer")}>MANAGE CUSTOMER</div>
+                <span>/{id}</span>
+                </div>
             <div >ID Code: {id}</div>
             <div className={cx("customer")}>
                 <div  style={{margin:"20px 50px"}}>CUSTOMER INFORMATION</div>
