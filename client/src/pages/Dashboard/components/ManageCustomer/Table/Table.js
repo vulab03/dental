@@ -43,14 +43,12 @@ function Table() {
         navigate('/manage-customer/new-customer')
     }
     const handleSeacrh=()=>{
-        setAmount(0)
-        setBack(true)
+        setLoading(true)
         axios.get(`${process.env.REACT_APP_SERVER_URI}user/get-phone?phone=${search}`)
         .then(res=>{
-            setList(res.data.list)
             if(res.data.list.length===0)
                 {
-                    axios.get(`${process.env.REACT_APP_SERVER_URI}user/find-id?id=${search}`)
+                axios.get(`${process.env.REACT_APP_SERVER_URI}user/find-id?id=${search}`)
                 .then(res=>{
                     setList([res.data.user])
                 })
@@ -58,7 +56,13 @@ function Table() {
                     setList([])
                 })
             }
+            else {
+                setList(res.data.list)
+            }
             setLoading(false)
+            setBack(true)
+            setAmount(0)
+
         })
         .catch(err=>{
             
@@ -68,17 +72,7 @@ function Table() {
     }
     return <>
     {
-        loading?
-        <div className={cx("loading")}> 
-            <ClipLoader
-                color={"#c1a666"}
-                loading={loading}
-                size={100}     
-                aria-label="Loading Spinner"
-                data-testid="loader"
-            />
-            </div>
-            :
+        
         <div className={cx('container')}>
             <div className={cx('content')}>
                 <div className={cx("tittle")}>MANAGE CUSTOMER</div>
@@ -101,6 +95,18 @@ function Table() {
                         Add
                     </div>
                 </div>
+                {loading?
+                <div className={cx("loading")}> 
+                    <ClipLoader
+                        color={"#c1a666"}
+                        loading={loading}
+                        size={100}     
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                    </div>
+                :
+                <div>
                 <div className={cx("table")}>
                     <div className={cx("element")}>
                         <div className={cx("row-tb")}>
@@ -116,7 +122,7 @@ function Table() {
 
                     {
                         list.length===0 ? 
-                        <div className={cx("no-result")}>*No result match</div>
+                        back&&<div className={cx("no-result")}>*No result match</div>
                         :list?.map((e,index)=>{
                             return (
                                 <div  key={e.id} className={cx("element")}>
@@ -168,7 +174,10 @@ function Table() {
                     </div>
                     }
                     
+                    </div>
                 </div>
+
+                }
             </div>
         </div>
     }
