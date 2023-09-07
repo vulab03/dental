@@ -25,12 +25,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 
-
 require("./routes/index")(app);
+require("./Services/call")
 
 // app.use('/',(req,res)=>{
 //     res.json("hello world")
 // })
+
+app.use("/",(req,res)=>{
+    return res.json({"message":"world"})
+})
 
 app.use((req,res,next)=>{
     next(createError(404,"Not Found"))
