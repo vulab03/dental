@@ -1,7 +1,7 @@
 const express = require("express")
 
 require("dotenv").config();
-
+require("./call")
 
 const app = express()
 
