@@ -79,7 +79,7 @@ function Table() {
                 <div style={{display:"flex",flexDirection:"row",padding:"10px 30px"}}>
                     <div className={cx("tittle")}>LIST OF CUSTOMERS</div>
                     <div className={cx("search")} >
-                        <input value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
+                        <input placeholder="search by phone & id"   value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
                         <div style={{color:"white",backgroundColor:"#c70039",cursor:"pointer",marginLeft:"10px", padding:"5px 10px",borderRadius:"20px"}} onClick={handleSeacrh}>
                         Search
                         </div>
@@ -109,7 +109,7 @@ function Table() {
                 <div>
                 <div className={cx("table")}>
                     <div className={cx("element")}>
-                        <div className={cx("row-tb")}>
+                        <div className={cx("row-tb")} style={{color:"#d09812",fontWeight:"600"}}>
                             
                             <div className={cx("h")}>NO.</div>
                             <div className={cx("r")}>ID</div>
@@ -117,7 +117,7 @@ function Table() {
                             <div className={cx("r")}>DATE START</div>
                             <div className={cx("h")}>ACTION</div>
                         </div>
-                        <div className={cx("horizontal-line")}></div>
+                        <div className={cx("horizontal-line")} style={{border: "1px solid #d09812"}}></div>
                     </div>
 
                     {
