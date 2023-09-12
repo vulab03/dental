@@ -5,14 +5,23 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "./components/GlobalStyles";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import logo from "./assets/images/logo.png"
+import {Helmet,HelmetProvider} from 'react-helmet-async'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    // <React.StrictMode>
-    <GlobalStyles>
-        <App />
-        <ToastContainer/>
-    </GlobalStyles>
+        // <React.StrictMode>
+    
+    <HelmetProvider>
+        <Helmet>
+        <title>Vulab Warranty</title>
+            <meta property="og:image" content={logo} />
+        </Helmet>
+        <GlobalStyles>
+            <App />
+            <ToastContainer/>
+        </GlobalStyles>
+    </HelmetProvider>
     // </React.StrictMode>,
 );
 

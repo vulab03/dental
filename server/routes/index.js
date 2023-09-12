@@ -4,6 +4,7 @@ const routes = (app) => {
     app.use("/company", require("./company.router"));
     app.use("/post",require("./post.router"));
     app.use("/file",require("./file.router"));
+    app.use("/id",require("./id.router"));
 };
 
 module.exports = routes;

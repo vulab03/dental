@@ -3,7 +3,6 @@ import classNames from "classnames/bind";
 import axios from "axios";
 import { createRef, useEffect, useRef, useState } from "react";
 import {toast} from "react-toastify"
-import ShortUniqueId from 'short-unique-id';
 
 const cx = classNames.bind(styles);
 
@@ -11,9 +10,9 @@ function New() {
     
     const [currentInputIndex, setCurrentInputIndex] = useState(0);
     const [addMore, setAdd] = useState(false)
+    const [newID,setID] = useState("")
 
     const inputRefs = useRef([])
-    const uid = new ShortUniqueId();
 
     inputRefs.current = Array(11)
         .fill()
@@ -31,12 +30,55 @@ function New() {
         };
 
     useEffect(()=>{
+        const currentDate = new Date();
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth() + 1; 
+        const year = currentDate.getFullYear() % 100;
+        if (parseInt(day)<10){
+            day = `0${day}`
+        } 
+        if (parseInt(month)<10){
+            month = `0${month}`
+        } 
+        const formattedDate = `${day}${month}${year}`;
+
+        axios.get(`${process.env.REACT_APP_SERVER_URI}id/get`)
+            .then(res=>{
+                const dayDb = res.data.date
+                if (dayDb !== formattedDate){
+                    setID(`${formattedDate}001`)
+                    setCustomer(newCus(`${formattedDate}001`))
+                }
+                else {
+                    const id = parseInt(res.data.id)+1
+                    if(id<10){
+                        setID(`${formattedDate}00${id}`)
+                        setCustomer(newCus(`${formattedDate}00${id}`))
+                    }
+                    else if (id<100){
+                        setID(`${formattedDate}0${id}`)
+                        setCustomer(newCus(`${formattedDate}0${id}`))
+                    }
+                    else {
+                        setID(`${formattedDate}${id}`)
+                        setCustomer(newCus(`${formattedDate}${id}`))
+                    }
+                }
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    },[addMore])
+
+    useEffect(()=>{
         inputRefs.current[currentInputIndex].current.focus(); 
     },[currentInputIndex])
     
-    const newCus =()=>{
+
+
+    const newCus =(id)=>{
         return {
-            id: uid.rnd(8),
+            id,
             dental :"",
             addressDental: "",
             address: "",
@@ -51,7 +93,7 @@ function New() {
         }
     }
 
-    const [customer,setCustomer] = useState(newCus())
+    const [customer,setCustomer] = useState(newCus(newID))
 
     const [change,setChange] = useState(false)
 
@@ -98,7 +140,12 @@ function New() {
                     position: 'top-right',
                     autoClose: 2000, // Thời gian thông báo tự đóng (ms)
                 });
+                
                 setAdd(true)
+                axios.post(`${process.env.REACT_APP_SERVER_URI}id/update`,{
+                    "date": newID.substring(0,6),
+                    "id": newID.substring(6,9)
+                })
             })
             .catch(err=>{
                 toast.error('Failed!', {
